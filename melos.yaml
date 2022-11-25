@@ -1,0 +1,9 @@
+name: evolve_monorepo
+
+packages:
+  - packages/**
+  - evolve_flutter
+
+command:
+  bootstrap:
+    usePubspecOverrides: true

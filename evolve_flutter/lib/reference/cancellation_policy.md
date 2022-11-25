@@ -1,0 +1,11 @@
+## Cancellation Policy
+- You may cancel your booking before the class’ late cancellation window to allow students on the waiting list to take your spot.
+- For weekday morning classes (Class Start Time: 6.30-7.45 AM), you may cancel your booking before 10 PM the night before.
+- For weekday peak hour classes (Class Start Time: 12-12.45 PM and 6-8.45 PM), you may cancel your booking up to 6 hours before the start of the class.
+- For all other classes, you may cancel your booking up to 3 hours before the start of the class.
+- If you cancel your booking within the late cancellation window, it counts as a late cancelation.
+- If you do not show up for a class that you have booked, it counts as a no-show.
+- For every late cancelation or no-show, you will receive a caution via email.
+- If you accumulate 3 cautions, your online booking privileges will be suspended for a period of 7 days.
+- While online booking privileges are suspended, you will not be able to book and confirm classes immediately. Instead, you will only be able to book a spot in a class 1 hour before the class begins.
+- The caution counter will reset 30 days from the first caution you received or at the end of your 7-day suspension.
