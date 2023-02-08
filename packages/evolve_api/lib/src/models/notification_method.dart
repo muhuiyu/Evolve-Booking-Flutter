@@ -1,6 +1,7 @@
 enum NotificationMethod {
   sms,
-  email;
+  email,
+  none;
 
   factory NotificationMethod.fromJson(String value) {
     switch (value) {
@@ -8,6 +9,8 @@ enum NotificationMethod {
         return NotificationMethod.sms;
       case 'EMAIL':
         return NotificationMethod.email;
+      case 'NONE':
+        return NotificationMethod.none;
       default:
         throw Exception('Unknown NotificationMethod: $value');
     }

@@ -27,7 +27,7 @@ class SessionTile extends StatelessWidget {
           border: const Border(
             bottom: BorderSide(width: 1.0, color: Colors.black12),
           ),
-          color: session.isBookingAvailable
+          color: session.isSessionEnded
               ? Colors.transparent
               : ColorConstant.inactiveGrayBackground,
         ),
@@ -56,7 +56,7 @@ class SessionTile extends StatelessWidget {
             session.startTime.getString,
             style: TextStyleConstant.small(
                 context,
-                session.isBookingAvailable
+                session.isSessionEnded
                     ? ColorConstant.label
                     : ColorConstant.label.withAlpha(80),
                 TextStyleWeight.normal),
@@ -66,7 +66,7 @@ class SessionTile extends StatelessWidget {
             session.getDurationString,
             style: TextStyleConstant.small(
                 context,
-                session.isBookingAvailable
+                session.isSessionEnded
                     ? ColorConstant.secondaryLabel
                     : ColorConstant.secondaryLabel.withAlpha(80),
                 TextStyleWeight.normal),
@@ -82,7 +82,7 @@ class SessionTile extends StatelessWidget {
         session.name,
         style: TextStyleConstant.body(
             context,
-            session.isBookingAvailable
+            session.isSessionEnded
                 ? ColorConstant.label
                 : ColorConstant.label.withAlpha(80),
             TextStyleWeight.medium),
@@ -92,7 +92,7 @@ class SessionTile extends StatelessWidget {
         session.location.fullName,
         style: TextStyleConstant.small(
             context,
-            session.isBookingAvailable
+            session.isSessionEnded
                 ? ColorConstant.secondaryLabel
                 : ColorConstant.secondaryLabel.withAlpha(80),
             TextStyleWeight.normal),
@@ -100,7 +100,7 @@ class SessionTile extends StatelessWidget {
     ];
 
     // TODO: determine timeslot conflict
-    // if (!session.isBookingAvailable) {
+    // if (!session.isSessionEnded) {
     //   items.add(SizedBox(
     //     height: SpacingConstant.trival(context),
     //   ));

@@ -8,6 +8,7 @@ export 'src/core/api_client.dart';
 export 'src/core/api_client_context.dart';
 export 'src/core/api_request.dart';
 export 'src/core/api_request_configurator.dart';
+export 'src/requests/sign_in_request.dart';
 export 'src/models/event.dart';
 export 'src/models/membership.dart';
 export 'src/models/notification_method.dart';

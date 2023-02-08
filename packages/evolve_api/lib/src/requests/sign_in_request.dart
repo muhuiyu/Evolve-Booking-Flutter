@@ -1,21 +1,57 @@
 import 'dart:convert';
+import 'package:evolve_api/evolve_api.dart';
 
-import 'package:evolve_api/src/core/api_request.dart';
-import 'package:evolve_api/src/models/notification_method.dart';
+enum SignInResponseBodyType {
+  mfa,
+  session;
+}
 
-class SignInResponseBody {
+abstract class SignInResponseBody {
+  final SignInResponseBodyType type;
+
+  SignInResponseBody({required this.type});
+
+  factory SignInResponseBody.fromJson(Map<String, dynamic> json) {
+    if (json['token'] != null) {
+      return SignInSessionResponseBody.fromJson(json);
+    } else {
+      return SignInMfaResponseBody.fromJson(json);
+    }
+  }
+}
+
+class SignInMfaResponseBody extends SignInResponseBody {
   final NotificationMethod mfaMethod;
   final bool secondFactorAuth;
 
-  SignInResponseBody._({
+  SignInMfaResponseBody._({
     required this.mfaMethod,
     required this.secondFactorAuth,
-  });
+  }) : super(type: SignInResponseBodyType.mfa);
 
-  factory SignInResponseBody.fromJson(Map<String, dynamic> json) {
-    return SignInResponseBody._(
+  factory SignInMfaResponseBody.fromJson(Map<String, dynamic> json) {
+    return SignInMfaResponseBody._(
       mfaMethod: NotificationMethod.fromJson(json['mfaMethod']),
       secondFactorAuth: json['secondFactorAuth'],
+    );
+  }
+}
+
+class SignInSessionResponseBody extends SignInResponseBody {
+  final String token;
+  final List<Membership> memberships;
+
+  SignInSessionResponseBody._({
+    required this.token,
+    required this.memberships,
+  }) : super(type: SignInResponseBodyType.session);
+
+  factory SignInSessionResponseBody.fromJson(Map<String, dynamic> json) {
+    return SignInSessionResponseBody._(
+      token: json['token'],
+      memberships: (json['memberships'] as List<dynamic>)
+          .map((e) => Membership.fromJson(e))
+          .toList(),
     );
   }
 }

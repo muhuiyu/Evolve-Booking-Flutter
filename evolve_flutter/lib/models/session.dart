@@ -57,6 +57,13 @@ class Session {
   }
 
   bool get isBookingAvailable {
+    DateTime newDate = DateTime.now().add(const Duration(days: 2));
+    DateTime newDateTime =
+        DateTime(newDate.year, newDate.month, newDate.day, 0, 0, 0);
+    return startTime.isAfter(DateTime.now()) && startTime.isBefore(newDateTime);
+  }
+
+  bool get isSessionEnded {
     return startTime.isAfter(DateTime.now());
   }
 

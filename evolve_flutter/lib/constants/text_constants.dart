@@ -41,4 +41,6 @@ class TextConstant {
   static const String cancelSessionConfirmationButtonText = 'Cancel Session';
   static const String bookingConfirmationCancelWarnings =
       'This class is within cancellation window. Cancelling this class may incur a penalty.';
+  static const String bookingNotAvailable =
+      'This class is not available for booking.';
 }

@@ -1,5 +1,6 @@
 import 'package:evolve_api/evolve_api.dart';
 import 'package:evolve_flutter/constants/all_constants.dart';
+import 'package:evolve_flutter/features/core/main_tab_controller.dart';
 import 'package:evolve_flutter/features/login/mfa_verification_page.dart';
 import 'package:evolve_flutter/widgets/custom_button.dart';
 import 'package:flutter/gestures.dart';
@@ -31,13 +32,8 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   _onLoginButtonTapped(ApiClient client) async {
-    // final String email = _emailController.text;
-    // final String password = _passwordController.text;
-
-    // for testing
-    final String email = "muyuhello@gmail.com";
-    final String password = "tisGiv-4qudfo-cawmug";
-
+    final String email = _emailController.text;
+    final String password = _passwordController.text;
     if (email.isEmpty || password.isEmpty) {
       return;
     }
@@ -46,6 +42,22 @@ class _LoginPageState extends State<LoginPage> {
         .performRequest(Api.signIn(email: email, password: password));
 
     if (mounted) {
+      _redirectToNextPage(responseBody, email, password);
+    }
+  }
+
+  _redirectToNextPage(
+      SignInResponseBody responseBody, String email, String password) {
+    if (responseBody.type == SignInResponseBodyType.session) {
+      responseBody as SignInSessionResponseBody;
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) => MainTabController(
+              token: responseBody.token, memberships: responseBody.memberships),
+        ),
+      );
+    } else {
+      responseBody as SignInMfaResponseBody;
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -80,24 +92,24 @@ class _LoginPageState extends State<LoginPage> {
                         _renderPassword(),
                         _renderRememberMe(),
                         _renderLoginButton(apiClient),
-                        RichText(
-                          textAlign: TextAlign.center,
-                          text: TextSpan(
-                            style: TextStyle(
-                                color: Colors.grey[900], fontSize: 16.0),
-                            children: <TextSpan>[
-                              const TextSpan(text: "Don't have a account? "),
-                              TextSpan(
-                                  text: 'Sign Up',
-                                  style: const TextStyle(
-                                      color: ColorConstant.primary),
-                                  recognizer: TapGestureRecognizer()
-                                    ..onTap = () {
-                                      // TODO
-                                    }),
-                            ],
-                          ),
-                        ),
+                        // RichText(
+                        //   textAlign: TextAlign.center,
+                        //   text: TextSpan(
+                        //     style: TextStyle(
+                        //         color: Colors.grey[900], fontSize: 16.0),
+                        //     children: <TextSpan>[
+                        //       const TextSpan(text: "Don't have a account? "),
+                        //       TextSpan(
+                        //           text: 'Sign Up',
+                        //           style: const TextStyle(
+                        //               color: ColorConstant.primary),
+                        //           recognizer: TapGestureRecognizer()
+                        //             ..onTap = () {
+                        //               // TODO
+                        //             }),
+                        //     ],
+                        //   ),
+                        // ),
                       ],
                     ),
                   ),
@@ -173,16 +185,16 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ),
         ),
-        Expanded(
-          child: GestureDetector(
-            onTap: () {},
-            child: Text(
-              TextConstant.forgetPassword,
-              textAlign: TextAlign.right,
-              style: TextStyle(color: Theme.of(context).colorScheme.secondary),
-            ),
-          ),
-        ),
+        // Expanded(
+        //   child: GestureDetector(
+        //     onTap: () {},
+        //     child: Text(
+        //       TextConstant.forgetPassword,
+        //       textAlign: TextAlign.right,
+        //       style: TextStyle(color: Theme.of(context).colorScheme.secondary),
+        //     ),
+        //   ),
+        // ),
       ],
     );
   }

@@ -269,21 +269,30 @@ class _BookingPageState extends State<BookingPage> {
             context, ColorConstant.label, TextStyleWeight.normal),
       ),
       SizedBox(height: SpacingConstant.medium(context)),
-      CustomTextButton(
+    ];
+
+    if (session.isBookingAvailable) {
+      dialogContent.add(CustomTextButton(
         text: buttonText,
         onPressed: () =>
             _onActionButtonTapped(client, memberships, session, action),
         type: CustomButtonType.primary,
-      ),
-      SizedBox(height: SpacingConstant.medium(context)),
-      Text(
+      ));
+      dialogContent.add(SizedBox(height: SpacingConstant.medium(context)));
+      dialogContent.add(Text(
         session.isWithinCancellationWindow
             ? TextConstant.bookingConfirmationCancelWarnings
             : session.getCancellationText,
         style: TextStyleConstant.small(
             context, ColorConstant.secondaryLabel, TextStyleWeight.normal),
-      ),
-    ];
+      ));
+    } else {
+      dialogContent.add(Text(
+        TextConstant.bookingNotAvailable,
+        style: TextStyleConstant.small(
+            context, ColorConstant.secondaryLabel, TextStyleWeight.normal),
+      ));
+    }
 
     return Container(
       height: MediaQuery.of(context).size.height * 0.35,
