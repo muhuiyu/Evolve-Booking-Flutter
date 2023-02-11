@@ -45,23 +45,21 @@ class _DashboardPageState extends State<DashboardPage> {
         builder: (context, auth) => ApiClientConsumer(
               builder: ((context, apiClient) => MountObserver(
                   onMount: () => _onMount(apiClient, auth.memberships),
-                  child: Container(
+                  child: Padding(
                     padding: const EdgeInsets.all(10),
-                    child: Expanded(
-                      child: SingleChildScrollView(
-                        scrollDirection: Axis.vertical,
-                        // padding: PaddingConstant.screenLayoutMarginsguide,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            _renderHeader(auth),
-                            const SizedBox(height: 20),
-                            _renderUpcomingSession(),
-                            // const SizedBox(height: 20),
-                            // _renderBookAgain(),
-                          ],
-                        ),
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.vertical,
+                      // padding: PaddingConstant.screenLayoutMarginsguide,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          _renderHeader(auth),
+                          const SizedBox(height: 20),
+                          _renderUpcomingSession(),
+                          // const SizedBox(height: 20),
+                          // _renderBookAgain(),
+                        ],
                       ),
                     ),
                   ))),

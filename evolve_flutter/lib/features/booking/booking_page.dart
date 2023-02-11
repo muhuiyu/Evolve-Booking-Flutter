@@ -110,19 +110,20 @@ class _BookingPageState extends State<BookingPage> {
     return AuthConsumer(
       builder: (context, auth) => ApiClientConsumer(
         builder: ((context, apiClient) => MountObserver(
-            onMount: () => _onMount(apiClient, auth.memberships),
-            child: Container(
-              padding: const EdgeInsets.symmetric(vertical: 10),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  _renderCategoryPicker(),
-                  _renderDatePicker(apiClient, auth.memberships),
-                  Expanded(
-                      child: _renderSessionList(apiClient, auth.memberships)),
-                ],
+              onMount: () => _onMount(apiClient, auth.memberships),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    _renderCategoryPicker(),
+                    _renderDatePicker(apiClient, auth.memberships),
+                    Expanded(
+                        child: _renderSessionList(apiClient, auth.memberships)),
+                  ],
+                ),
               ),
-            ))),
+            )),
       ),
     );
   }

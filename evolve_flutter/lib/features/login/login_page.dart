@@ -34,6 +34,7 @@ class _LoginPageState extends State<LoginPage> {
   _onLoginButtonTapped(ApiClient client) async {
     final String email = _emailController.text;
     final String password = _passwordController.text;
+
     if (email.isEmpty || password.isEmpty) {
       return;
     }
